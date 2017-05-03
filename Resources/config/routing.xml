@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="lracicot_fos_user_manager_list" path="/list">
+        <default key="_controller">lracicotFOSUserManagerBundle:Default:index</default>
+    </route>
+
+    <route id="lracicot_fos_user_manager_new" path="/new" methods="GET POST">
+        <default key="_controller">lracicotFOSUserManagerBundle:Default:new</default>
+    </route>
+
+    <route id="lracicot_fos_user_manager_show" path="/{id}" methods="GET">
+        <default key="_controller">lracicotFOSUserManagerBundle:Default:show</default>
+    </route>
+
+    <route id="lracicot_fos_user_manager_edit" path="/{id}/edit" methods="GET POST">
+        <default key="_controller">lracicotFOSUserManagerBundle:Default:edit</default>
+    </route>
+
+    <route id="lracicot_fos_user_manager_delete" path="/{id}/delete" methods="DELETE">
+        <default key="_controller">lracicotFOSUserManagerBundle:Default:delete</default>
+    </route>
+</routes>
