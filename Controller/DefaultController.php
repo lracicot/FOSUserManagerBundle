@@ -22,7 +22,7 @@ class DefaultController extends Controller
 
         $users = $em->getRepository('AppBundle:User')->findAll();
 
-        return $this->render('@lracicotFOSUserManager/Default/index.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/index.html.twig', array(
             'users' => $users,
         ));
     }
@@ -47,7 +47,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('lracicot_fos_user_manager_show', array('id' => $user->getId()));
         }
 
-        return $this->render('@lracicotFOSUserManager/Default/new.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/new.html.twig', array(
             'user' => $user,
             'form' => $form->createView(),
         ));
@@ -60,7 +60,7 @@ class DefaultController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
 
-        return $this->render('@lracicotFOSUserManager/Default/show.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/show.html.twig', array(
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -81,7 +81,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('lracicot_fos_user_manager_edit', array('id' => $user->getId()));
         }
 
-        return $this->render('@lracicotFOSUserManager/Default/edit.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/edit.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
