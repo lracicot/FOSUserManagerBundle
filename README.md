@@ -18,7 +18,7 @@ Follow the instructions from the [FOSUserBundle documentation](https://symfony.c
 Require the bundle using composer:
 
 ```shell
-$ composer require lracicot/fosusermanagerbundle
+$ composer require "lracicot/fosusermanagerbundle" "v0.1-alpha"
 ```
 
 ### Step 3: Register the bundle
