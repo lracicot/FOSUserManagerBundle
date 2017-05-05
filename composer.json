@@ -19,5 +19,5 @@
             "lracicot\\FOSUserManagerBundle" : ""
         }
     },
-    "target-dir" : "lracicot/FOSUserManagerBundle",
+    "target-dir" : "lracicot/FOSUserManagerBundle"
 }
