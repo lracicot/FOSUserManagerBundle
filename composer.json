@@ -1,0 +1,23 @@
+{
+    "name" : "lracicot/fosusermanagerbundle",
+    "description" : "A CRUD user manager for the FOSUserBundle",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Louis Racicot",
+        "email" : "info@louisracicot.com"
+    }],
+    "keywords" : [
+        "user manager fosuserbundle"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-0" : {
+            "lracicot\\FOSUserManagerBundle" : ""
+        }
+    },
+    "target-dir" : "lracicot/FOSUserManagerBundle",
+}
