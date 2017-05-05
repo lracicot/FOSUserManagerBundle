@@ -20,7 +20,7 @@
 
 <a href="{{ path('lracicot_fos_user_manager_list') }}">Back to the list</a>
 
-<a href="{{ path('lracicot_fos_user_manager_edit', { 'id': user.id }) }}" class="btn btn-primary">Edit</a>
+<a href="{{ path('lracicot_fos_user_manager_edit', { 'userId': user.id }) }}" class="btn btn-primary">Edit</a>
 
 {{ form_start(delete_form) }}
     <input type="submit" value="Delete" class="btn btn-danger">

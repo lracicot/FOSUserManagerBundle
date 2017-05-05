@@ -12,15 +12,15 @@
         <default key="_controller">lracicotFOSUserManagerBundle:Default:new</default>
     </route>
 
-    <route id="lracicot_fos_user_manager_show" path="/{id}" methods="GET">
+    <route id="lracicot_fos_user_manager_show" path="/{userId}" methods="GET">
         <default key="_controller">lracicotFOSUserManagerBundle:Default:show</default>
     </route>
 
-    <route id="lracicot_fos_user_manager_edit" path="/{id}/edit" methods="GET POST">
+    <route id="lracicot_fos_user_manager_edit" path="/{userId}/edit" methods="GET POST">
         <default key="_controller">lracicotFOSUserManagerBundle:Default:edit</default>
     </route>
 
-    <route id="lracicot_fos_user_manager_delete" path="/{id}/delete" methods="DELETE">
+    <route id="lracicot_fos_user_manager_delete" path="/{userId}/delete" methods="DELETE">
         <default key="_controller">lracicotFOSUserManagerBundle:Default:delete</default>
     </route>
 </routes>

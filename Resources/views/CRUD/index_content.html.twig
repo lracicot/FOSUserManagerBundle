@@ -13,8 +13,8 @@
         <tr>
             <td>{{ user.username }}</td>
             <td>
-                <a href="{{ path('lracicot_fos_user_manager_show', { 'id': user.id }) }}" class="btn btn-default">show</a>
-                <a href="{{ path('lracicot_fos_user_manager_edit', { 'id': user.id }) }}" class="btn btn-primary">edit</a>
+                <a href="{{ path('lracicot_fos_user_manager_show', { 'userId': user.id }) }}" class="btn btn-default">show</a>
+                <a href="{{ path('lracicot_fos_user_manager_edit', { 'userId': user.id }) }}" class="btn btn-primary">edit</a>
             </td>
         </tr>
     {% endfor %}

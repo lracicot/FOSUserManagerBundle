@@ -2,7 +2,7 @@
 
 namespace lracicot\FOSUserManagerBundle\Controller;
 
-use AppBundle\Entity\User;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,13 +18,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $userManager = $this->get('fos_user.user_manager');
+        $users = $userManager->findUsers();
 
-        $users = $em->getRepository('AppBundle:User')->findAll();
-
-        return $this->render('@lracicotFOSUserManager/CRUD/index.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/index.html.twig', [
             'users' => $users,
-        ));
+        ]);
     }
 
     /**
@@ -40,37 +39,38 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $user->setEnabled(true);
             $userManager->updateUser($user);
 
-            return $this->redirectToRoute('lracicot_fos_user_manager_show', array('id' => $user->getId()));
+            return $this->redirectToRoute('lracicot_fos_user_manager_show', ['userId' => $user->getId()]);
         }
 
-        return $this->render('@lracicotFOSUserManager/CRUD/new.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
      * Finds and displays a user entity.
      */
-    public function showAction(User $user)
+    public function showAction($userId)
     {
+        $user = $this->findUserById($userId);
         $deleteForm = $this->createDeleteForm($user);
 
-        return $this->render('@lracicotFOSUserManager/CRUD/show.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/show.html.twig', [
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
      * Displays a form to edit an existing user entity.
      */
-    public function editAction(Request $request, User $user)
+    public function editAction(Request $request, $userId)
     {
+        $user = $this->findUserById($userId);
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('lracicot\FOSUserManagerBundle\Form\UserEditType', $user);
         $editForm->handleRequest($request);
@@ -78,21 +78,22 @@ class DefaultController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('lracicot_fos_user_manager_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('lracicot_fos_user_manager_edit', ['userId' => $user->getId()]);
         }
 
-        return $this->render('@lracicotFOSUserManager/CRUD/edit.html.twig', array(
+        return $this->render('@lracicotFOSUserManager/CRUD/edit.html.twig', [
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
      * Deletes a user entity.
      */
-    public function deleteAction(Request $request, User $user)
+    public function deleteAction(Request $request, $userId)
     {
+        $user = $this->findUserById($userId);
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 
@@ -108,16 +109,28 @@ class DefaultController extends Controller
     /**
      * Creates a form to delete a user entity.
      *
-     * @param User $user The user entity
+     * @param UserInterface $user The user entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(User $user)
+    private function createDeleteForm(UserInterface $user)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('lracicot_fos_user_manager_delete', array('id' => $user->getId())))
+            ->setAction($this->generateUrl('lracicot_fos_user_manager_delete', ['userId' => $user->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Find a user by id.
+     *
+     * @param int $id property value
+     *
+     * @return UserInterface
+     */
+    protected function findUserById($id)
+    {
+        return $this->get('fos_user.user_manager')->findUserBy(['id' => $id]);
     }
 }
